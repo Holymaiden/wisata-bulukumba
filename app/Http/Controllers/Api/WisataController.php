@@ -41,7 +41,7 @@ class WisataController extends Controller
                 return $query->where('nama', 'like', '%' . $search . '%');
             })->limit($limit)->offset($offset)->orderBy('id', 'desc')->get();
 
-            $apiKey = 'AIzaSyAhSPJ2dP7fwOng3ixpOfnnx4xVZT7DavE';
+            $apiKey = '';
             if ($start_lat != '' && $start_lng != '') {
                 $data->map(function ($item) use ($start_lat, $start_lng, $apiKey) {
                     // $item->jarak = Helper::distance($start_lat, $start_lng, $item->lat, $item->lng, 'km');
@@ -106,7 +106,7 @@ class WisataController extends Controller
             'latitude' => $request->latitude2,
             'longitude' => $request->longitude2
         ];
-        $apiKey = 'AIzaSyAhSPJ2dP7fwOng3ixpOfnnx4xVZT7DavE';
+        $apiKey = '';
         $url = "https://maps.googleapis.com/maps/api/directions/json?origin={$startLocation['latitude']},{$startLocation['longitude']}&destination={$endLocation['latitude']},{$endLocation['longitude']}&alternatives=true&mode=driving&optimize:true&key={$apiKey}";
 
         $response = json_decode(file_get_contents($url), true);
