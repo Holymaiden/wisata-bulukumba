@@ -67,6 +67,11 @@ Route::group(['prefix' => '',  'namespace' => 'App\Http\Controllers\Admin',  'mi
             Route::delete('/{id}', 'WisataController@destroy')->name('wisatas.delete');
         });
 
+        Route::group(['prefix' => '/komentar'], function () {
+            Route::get('/', 'KomentarController@index')->name('komentar');
+            Route::get('/data', 'KomentarController@data')->name('komentar.data');
+        });
+
         Route::group(['prefix' => '/profile'], function () {
             Route::get('/', 'ProfileController@index')->name('profile');
         });

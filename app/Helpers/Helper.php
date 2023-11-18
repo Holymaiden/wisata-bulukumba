@@ -172,4 +172,50 @@ class Helper
             return ($dist);
         }
     }
+
+    public static function toArrayDistance($startLocation, $endLocation, $route)
+    {
+        $maps = array();
+        $new_maps = array();
+
+        $maps = array_map(function ($step) {
+            return array(
+                "start_location" => $step['start_location'],
+                "end_location" => $step['end_location'],
+                "distance" => $step['distance'],
+                "duration" => $step['duration'],
+            );
+        }, $route);
+
+        // jika hanya 1 rute
+        // ubah format array
+        $new_maps = array_map(function ($route) {
+            return array(
+                "latitude" => $route['start_location']['lat'],
+                "longitude" => $route['start_location']['lng'],
+            );
+        }, $maps);
+
+        $last_index = count($maps) - 1;
+
+        // add last location
+        $new_maps[] = array(
+            "latitude" => $maps[$last_index]['end_location']['lat'],
+            "longitude" => $maps[$last_index]['end_location']['lng'],
+        );
+
+
+        // tambahkan start location dan end location
+        array_unshift($new_maps, array(
+            "latitude" => (float)$startLocation['latitude'],
+            "longitude" => (float)$startLocation['longitude'],
+        ));
+
+        array_push($new_maps, array(
+            "latitude" => (float)$endLocation['latitude'],
+            "longitude" => (float)$endLocation['longitude'],
+        ));
+
+        return $new_maps;
+    }
 }

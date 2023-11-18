@@ -43,4 +43,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api', 'midd
 
     Route::get('/users/{id}', 'LoginController@getUser');
     Route::put('/users/{id}', 'LoginController@updateUser');
+
+    Route::get('/komentar', 'KomentarController@getByWU');
+    Route::post('/komentar', 'KomentarController@createKomentar');
 });
